@@ -6,4 +6,19 @@
     background: linear-gradient(180deg, #3333A3 5.09%, #121212 33.4%);
 }
 
+.card {
+    background-color: rgba(255, 255, 255, 0.04);
+}
 
+body{
+    overflow: hidden;
+}
+
+::-webkit-scrollbar{
+    background-color: white;
+    height: 4px;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: red;
+}
