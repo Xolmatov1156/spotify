@@ -35,10 +35,13 @@ function TopMusic({ parTitle, searchText, accessToken }) {
     }
   }, [accessToken, searchText]);
 
+
   const visibleTracks = showAll ? tracks : tracks.slice(0, 4);
 
   const handleTrackClick = (track) => {
-    navigate('/playlist', { state: { track } });
+    navigate(`/playlist/${accessToken}/${searchText}`);
+    window.localStorage.setItem('imgSrc', JSON.stringify(track.img))
+    console.log(track.img)
   };
   
   

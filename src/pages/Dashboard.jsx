@@ -2,21 +2,20 @@ import React, { useEffect, useState } from "react";
 import TopMusic from "../components/TopMusic";
 import SpotifyWebApi from "spotify-web-api-node";
 import { CLIENT_ID } from "../hook/useEnv";
-import { useAuth } from "../hook/useAuth";
-import {BackIcon,BackIcon2,} from "../assets/Icons/Icons";
-import LeftSidebar from "../components/LeftSidebar";
-import RightSidebar from "../components/RightSidebar";
+import { useNavigate } from 'react-router-dom';
+import { BackIcon, BackIcon2 } from "../assets/Icons/Icons";
+import PlayBack from "../components/PlayBack";
 
 function Dashboard({ accessToken }) {
-  const spotifyApi = new SpotifyWebApi({
-    clientId: CLIENT_ID,
-  });
-
+  const spotifyApi = new SpotifyWebApi({ clientId: CLIENT_ID });
   const [topMixes, setTopMixes] = useState([]);
   const [madeForYou, setMadeForYou] = useState([]);
   const [recentlyPlayed, setRecentlyPlayed] = useState([]);
   const [jumpBackIn, setJumpBackIn] = useState([]);
   const [uniquelyYours, setUniquelyYours] = useState([]);
+  const [currentTrackUri, setCurrentTrackUri] = useState(null);
+  const [playing, setPlaying] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!accessToken) return;
@@ -54,11 +53,14 @@ function Dashboard({ accessToken }) {
   return (
     <>
       <div className="flex">
-        <LeftSidebar/>
-        <div className="p-4 h-[100vh] w-[66%] bg overflow-y-auto dashboard">
-          <div className="flex gap-[22px]">
+        <div className="pl-[35px] h-[100vh] bg overflow-y-auto overnone">
+          <div className="flex gap-[22px] items-center h-[80px]">
+            <button onClick={() => navigate(-1)}>
             <BackIcon />
-            <BackIcon2 />
+            </button>
+            <button onClick={() => navigate(1)}>
+              <BackIcon2 />
+            </button>
           </div>
           <h1 className="text-white text-[40px] font-bold mt-[50px]">
             Good Afternoon
@@ -67,7 +69,11 @@ function Dashboard({ accessToken }) {
             {allTracks.map((track, index) => (
               <div
                 key={index}
-                className="w-[460px] h-[82px] card rounded-[8px] flex items-center bg-gray-800 hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
+                onClick={() => {
+                  setCurrentTrackUri(track.uri);
+                  setPlaying(true);
+                }}
+                className="w-[450px] h-[82px] card rounded-[8px] flex items-center bg-gray-800 hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
               >
                 <img
                   src={track.album.images[0]?.url}
@@ -80,6 +86,8 @@ function Dashboard({ accessToken }) {
               </div>
             ))}
           </div>
+
+          {/* Other TopMusic sections */}
           <div className="mt-[50px]">
             <TopMusic
               accessToken={accessToken}
@@ -107,9 +115,15 @@ function Dashboard({ accessToken }) {
             parTitle={"Uniquely yours"}
             searchText={"Uniquely yours"}
           />
+      <PlayBack
+        play={currentTrackUri} // Pass the current track's URI
+        playing={playing}
+        setPlaying={setPlaying}
+        accessToken={accessToken}
+      />
         </div>
-      <RightSidebar/>
       </div>
+
     </>
   );
 }

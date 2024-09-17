@@ -4,7 +4,7 @@ import { CreateIcon, HomeIcon, LibraryIcon, LikedIcon, SearchIcon } from '../ass
 
 function LeftSidebar() {
   return (
-    <div className="h-screen w-[17%] bg-black overflow-y-auto dashboard">
+    <div className="h-screen col-span-2 bg-black overflow-y-auto overnone">
           <div className="">
             <div className="pt-[70px] pl-[30px] flex flex-col space-y-[20px]">
               <NavLink
@@ -18,10 +18,14 @@ function LeftSidebar() {
                 <HomeIcon />
                 <p className="text-[18px]">Home</p>
               </NavLink>
-              <button className="flex items-center space-x-[20px]">
+              <NavLink to={"/search"} className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center text-white space-x-[20px]"
+                    : "flex items-center text-[#B3B3B3] space-x-[20px]"
+                }>
                 <SearchIcon />
-                <p className="text-[18px] text-[#B3B3B3]">Search</p>
-              </button>
+                <p className="text-[18px]">Search</p>
+              </NavLink>
               <button className="flex items-center space-x-[20px]">
                 <LibraryIcon />
                 <p className="text-[18px] text-[#B3B3B3]">Your Library</p>

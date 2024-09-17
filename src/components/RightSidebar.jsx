@@ -3,7 +3,7 @@ import { UserAddIcon, UserInformation, XMark } from '../assets/Icons/Icons'
 
 function RightSidebar() {
   return (
-    <div className="h-screen w-[17%] bg-black pt-[30px]">
+    <div className="h-screen col-span-2 bg-black pt-[30px]">
           <div className="text-[#CCCCCC] w-[208px] mx-auto">
             <div className="w-[208px] mx-auto flex justify-between">
               <h3>Friend Activity</h3>

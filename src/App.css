@@ -27,7 +27,7 @@
     background-color: #3333a3;
   }
 
-  .dashboard::-webkit-scrollbar {
+  .overnone::-webkit-scrollbar {
     display: none;
   }
 
@@ -37,5 +37,15 @@
 
   .playlist {
     background: linear-gradient(180deg, #DEF628 5.09%, #121212 43.28%);
+  }
+  .search {
+    background: linear-gradient(180deg, #604EC1 5.09%, #121212 43.28%);
+  }
 
+  div#playlist{
+    background: linear-gradient(180deg, #DEF628 5.09%, #121212 43.28%);
+  }
+
+  .likebg {
+    background: linear-gradient(180deg, #604EC1 5.09%, #121212 43.28%);
   }
