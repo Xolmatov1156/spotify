@@ -1,16 +1,12 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { Login, Dashboard } from './pages'
 import './App.css'
-import { Context } from './context/CodeContext'
+import CustomRoutes from './routes'
 
 function App() {
-  const {setCode} = useContext(Context)
   const code = new URLSearchParams(window.location.search).get("code")
-  useEffect(() => {
-    setCode(code)
-  },[code])
   
-  return code ? <Dashboard code={code}/> : <Login />
+  return code ? <CustomRoutes code={code}/> : <Login />
 }
 
 export default App

@@ -7,12 +7,13 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+
 app.post("/login", (req, res) => {
   const code = req.body.code
   const spotifyApi = new SpotifyWebApi({
     redirectUri: "http://localhost:5173",
-    clientId: "dd63edbcb38949cf9fbc287fcdecd6c9",
-    clientSecret: "6816ce6c201d40fda68661084fc43211"
+    clientId: 'dd63edbcb38949cf9fbc287fcdecd6c9',
+    clientSecret: '6816ce6c201d40fda68661084fc43211'
   })
   spotifyApi.authorizationCodeGrant(code).then(data => {
     res.json({
